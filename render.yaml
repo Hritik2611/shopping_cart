@@ -1,0 +1,13 @@
+# Render service configuration to build and run the Go backend
+# This ensures Render builds the `backend` folder and starts the compiled binary.
+services:
+  - type: web
+    name: shopping-backend
+    env: go
+    # Build inside the backend folder and output a single binary at the repo root called `server`.
+    buildCommand: |
+      cd backend; 
+      go build -o ../server .
+    # Start the produced binary (Render sets the `PORT` env var automatically and
+    # the app already binds to `0.0.0.0:$PORT` in `main.go`).
+    startCommand: ./server
