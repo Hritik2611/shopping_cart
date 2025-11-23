@@ -87,8 +87,9 @@ func main() {
 		port = "8080" // Default for local testing
 	}
 
-	log.Printf("Server starting on port %s", port)
-	if err := r.Run(":" + port); err != nil {
-		log.Fatalf("Failed to start server: %v", err)
-	}
+	log.Printf("Server starting on 0.0.0.0:%s", port)
+// Bind to 0.0.0.0:PORT to ensure accessibility on the host machine
+    if err := r.Run("0.0.0.0:" + port); err != nil { 
+	log.Fatalf("Failed to start server: %v", err)
+}
 }
